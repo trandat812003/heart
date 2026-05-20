@@ -190,7 +190,7 @@ var Particle = (function() {
 
   };
 
-  Particle.prototype.draw = function(context, image) {
+  Particle.prototype.draw = function(context, image, color) {
 
     function ease(t) {
 
@@ -202,6 +202,7 @@ var Particle = (function() {
 
     context.globalAlpha = 1 - this.age / settings.particles.duration;
 
+    context.filter = "hue-rotate(" + (color + this.age * 120) + "deg)"
     context.drawImage(image, this.position.x - size / 2, this.position.y - size / 2, size, size);
 
   };
@@ -305,7 +306,7 @@ var ParticlePool = (function() {
 
   };
 
-  ParticlePool.prototype.draw = function(context, image) {
+  ParticlePool.prototype.draw = function(context, image, color) {
 
     // draw active particles
 
@@ -313,7 +314,7 @@ var ParticlePool = (function() {
 
       for (i = firstActive; i < firstFree; i++)
 
-        particles[i].draw(context, image);
+        particles[i].draw(context, image, color);
 
     }
 
@@ -321,11 +322,11 @@ var ParticlePool = (function() {
 
       for (i = firstActive; i < particles.length; i++)
 
-        particles[i].draw(context, image);
+        particles[i].draw(context, image, color);
 
       for (i = 0; i < firstFree; i++)
 
-        particles[i].draw(context, image);
+        particles[i].draw(context, image, color);
 
     }
 
@@ -476,13 +477,12 @@ var ParticlePool = (function() {
 
     }
 
-   
-
     // update and draw particles
 
     particles.update(deltaTime);
 
-    particles.draw(context, image);
+    var hue = (newTime * 60) % 360;
+    particles.draw(context, image, hue);
 
   }
 
