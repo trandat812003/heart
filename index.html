@@ -56,7 +56,7 @@
        */
 
        var bg = new Image();
-        bg.src = "./thi_tho.jpg";
+        bg.src = "https://trandat812003.github.io/heart/thi_tho.jpg";
 
         var settings = {
 
@@ -205,8 +205,19 @@
 
                 context.globalAlpha = 1 - this.age / settings.particles.duration;
 
-                context.filter = "hue-rotate(" + (color + this.age * 120) + "deg)"
-                context.drawImage(image, this.position.x - size / 2, this.position.y - size / 2, size, size);
+                // context.filter = "hue-rotate(" + (color + this.age * 120) + "deg)"
+                // context.drawImage(image, this.position.x - size / 2, this.position.y - size / 2, size, size);
+
+                context.save();
+                context.filter = "hue-rotate(" + (color + this.age * 120) + "deg)";
+                context.drawImage(
+                    image,
+                    this.position.x - size / 2,
+                    this.position.y - size / 2,
+                    size,
+                    size
+                );
+                context.restore();
 
             };
 
@@ -484,13 +495,15 @@
 
                 if (bg.complete) {
                     drawCover(bg);
+                    context.fillStyle = "rgba(0, 0, 0, 0.55)";
+                    context.fillRect(0, 0, canvas.width, canvas.height);
                 } else {
                     context.fillStyle = "#000";
                     context.fillRect(0, 0, canvas.width, canvas.height);
                 }
 
-                context.fillStyle = "rgba(0,0,0,0.3)";
-                context.fillRect(0, 0, canvas.width, canvas.height);
+                // context.fillStyle = "rgba(0,0,0,0.3)";
+                // context.fillRect(0, 0, canvas.width, canvas.height);
 
                 // create new particles
 
