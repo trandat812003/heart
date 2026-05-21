@@ -405,11 +405,47 @@ var ParticlePool = (function () {
 
     const music = document.getElementById("bgMusic");
 
+
+    let allowChoice = false;
+
+    music.addEventListener("timeupdate", function () {
+
+        if (music.currentTime >= 15 && !allowChoice) {
+            allowChoice = true;
+            console.log("Đã mở lựa chọn sau 15s");
+        }
+
+    });
+
+    canvas.addEventListener("click", function (e) {
+
+        if (!allowChoice) return; // chưa đủ 15s thì không làm gì
+
+        const rect = canvas.getBoundingClientRect();
+
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        const centerX = canvas.width / 2;
+        const centerY = canvas.height / 2;
+
+        const distance = Math.sqrt(
+            Math.pow(mouseX - centerX, 2) +
+            Math.pow(mouseY - centerY, 2)
+        );
+
+        if (distance < 120) {
+            window.location.href = "love.html";
+        }
+    });
+
+    // const music = document.getElementById("bgMusic");
+
     music.addEventListener("ended", function () {
 
-        // chuyển sang trang khác
-        window.location.href = "love.html";
+        if (!allowChoice) return;
 
+        window.location.href = "love.html";
     });
 
 })(document.getElementById('pinkboard'));
