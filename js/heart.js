@@ -403,27 +403,13 @@ var ParticlePool = (function () {
 
     }, { once: true });
 
-    // canvas.addEventListener("click", function (e) {
+    const music = document.getElementById("bgMusic");
 
-    //     const rect = canvas.getBoundingClientRect();
+    music.addEventListener("ended", function () {
 
-    //     const mouseX = e.clientX - rect.left;
-    //     const mouseY = e.clientY - rect.top;
+        // chuyển sang trang khác
+        window.location.href = "love.html";
 
-    //     const heartX = canvas.width / 2;
-    //     const heartY = canvas.height / 2;
-
-    //     const distance = Math.sqrt(
-    //         Math.pow(mouseX - heartX, 2) +
-    //         Math.pow(mouseY - heartY, 2)
-    //     );
-
-    //     // click gần giữa trái tim
-    //     if (distance < 120) {
-
-    //         // đổi trang
-    //         window.location.href = "love.html";
-    //     }
-    // });
+    });
 
 })(document.getElementById('pinkboard'));
