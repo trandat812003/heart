@@ -445,7 +445,7 @@ var ParticlePool = (function () {
 
         if (!allowChoice) return;
 
-        window.location.href = "love.html";
+        window.location.href = "https://trandat812003.github.io/heart/love.html";
     });
 
 })(document.getElementById('pinkboard'));
