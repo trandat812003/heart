@@ -395,6 +395,14 @@ var ParticlePool = (function () {
 
     }, 10);
 
+    document.addEventListener("click", function () {
+
+        const music = document.getElementById("bgMusic");
+
+        music.play();
+
+    }, { once: true });
+
     // canvas.addEventListener("click", function (e) {
 
     //     const rect = canvas.getBoundingClientRect();
